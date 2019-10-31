@@ -15,8 +15,9 @@ class Converter extends Component {
 
    handleChange = (e) => {
       this.props.currencyUpdate(e.target.value)
-      const { inputValue } = this.props
-      const value = inputValue !== isNaN ? inputValue : 0
+      const { conversionValue: {input} } = this.props
+      //const { inputValue } = this.props
+      const value = input !== isNaN ? input : 0
       this.makeConversion(e.target.value,value)
    }
    
@@ -24,15 +25,16 @@ class Converter extends Component {
       const { rates,base } = this.props.currencyData.currency
       let selectedRate = rates[targetCurrency]
       const result = input * selectedRate
-      this.props.resultUpdate(result)
-      if (result !== 0 || result !== isNaN) {
+      if (result !== 0 || !isNaN(result)) {
+       console.log('result',result)
+        this.props.resultUpdate(result)
         const currentData = {
           base: base,
           targetCurrency: targetCurrency,
           input: input,
           result: result
         }
-          this.props.addToHistory(currentData)
+        this.props.addToHistory(currentData)
       }
    }
 
@@ -43,14 +45,15 @@ class Converter extends Component {
    }
 
   render() {
-      if (this.props.currencyData === null || this.props.currencyResult === isNaN){
+    const { conversionValue : {result} } = this.props
+      if (this.props.currencyData === null || result === isNaN){
         return <div></div>
       }
       const { base,date } = this.props.currencyData.currency
       const toCurrency = ['GBP','INR']
-      const { currencyResult } = this.props
-      console.log('result',this.props.currencyResult)
-      console.log('test',this.props.conversionHistory)
+     // const { currencyResult } = this.props
+     // console.log('result',result)
+    //  console.log('test',this.props.conversionHistory)
       const { conversionHistory } = this.props || {};
       const List = conversionHistory.length ? (
         conversionHistory.map((currentHistory,index ) => {
@@ -98,7 +101,7 @@ class Converter extends Component {
                   </select>
                   <input 
                       type='number' 
-                      value={currencyResult ? currencyResult : 0}
+                      value={result ? result : 0}
                       onChange={this.handleInput}
                       disabled={true}
                   />
@@ -120,8 +123,7 @@ const mapStateToProps = state => {
   return {
     currencyData: state.currencyData,
     targetCurrency: state.targetCurrency,
-    currencyResult: state.currencyResult,
-    inputValue: state.inputValue,
+    conversionValue: state.conversionValue,
     conversionHistory: state.conversionHistory
   }
 }
