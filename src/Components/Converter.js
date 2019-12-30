@@ -16,7 +16,6 @@ class Converter extends Component {
   handleChange = (e) => {
     this.props.currencyUpdate(e.target.value)
     const { conversionValue: { input } } = this.props
-    //const { inputValue } = this.props
     const value = input !== isNaN ? input : 0
     this.makeConversion(e.target.value, value)
   }
@@ -26,7 +25,6 @@ class Converter extends Component {
     let selectedRate = rates[targetCurrency]
     const result = input * selectedRate
     if (result !== 0 && !isNaN(result)) {
-      console.log('result', result)
       this.props.resultUpdate(result)
       const currentData = {
         base: base,
@@ -51,9 +49,6 @@ class Converter extends Component {
     }
     const { base, date } = this.props.currencyData.currency
     const toCurrency = ['GBP', 'INR']
-    // const { currencyResult } = this.props
-    // console.log('result',result)
-    //  console.log('test',this.props.conversionHistory)
     const { conversionHistory } = this.props || {};
     const List = conversionHistory.length ? (
       conversionHistory.map((currentHistory, index) => {

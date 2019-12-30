@@ -7,6 +7,6 @@ export const fetchCurrency = () => dispatch => {
                   type: FETCH_CURRENCY,
                   currency: res.data
             }))
-            .then(e => console.log('FETCHING CURRENCIES', e))
+            .then(e => console.log('FETCHING CURRENCIES', ))
             .catch(err => console.log('ERROR OCCURED DURING FETCHING', err))
 } 
