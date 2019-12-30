@@ -1,5 +1,4 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-Currency Convertor
 -----
 ![Hnet-image](https://user-images.githubusercontent.com/50949038/71567836-06052080-2ae8-11ea-8ff6-6981dc2819bc.gif)
 
