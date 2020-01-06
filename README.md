@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 -----
-![Hnet-image](https://user-images.githubusercontent.com/50949038/71567836-06052080-2ae8-11ea-8ff6-6981dc2819bc.gif)
-
+React JS, Redux and Bootstrap
+![Hnet-image (4)](https://user-images.githubusercontent.com/50949038/71824107-c4174400-30be-11ea-9920-75f9973da5f3.gif)
 
 ## Available Scripts
 
