@@ -68,36 +68,39 @@ class Converter extends Component {
       )
     return (
       <div className='container-fluid'>
-        <div style={{ width: '500px', margin: 'auto', padding: '50px' }}>
+        <div className='currency-converter'>
           <form className='form'>
-            <div className='card-panel'>
-              <h5 className='center card-title'>CURRENCY CONVERTER</h5><br />
+          <h5 className='card-header'>CURRENCY CONVERTER</h5><br />
+            <div className='card' style={{padding: '2em'}}>
+              
               <h6>{date}</h6>
               <div className='row'>
-                <div className='input-field col s6'>
+                <div className='form-group'>
                   <select
-                    className='browser-default'
+                    className='form-control'
                     name='base'
                     onChange={this.handleChange}
                     value={base}
                   >
                     <option>{base}</option>
-                  </select>
+                  </select><br/>
                   <input
+                    className='form-control'
                     type='number'
                     onChange={this.handleInput}
                   />
                 </div>
                 <div className='input-field col s6'>
                   <select
-                    className='browser-default'
+                    className='form-control'
                     onChange={this.handleChange}
                   >
                     {
                       toCurrency.map(cur => <option key={cur}>{cur}</option>)
                     }
-                  </select>
+                  </select><br/>
                   <input
+                    className='form-control'
                     type='number'
                     value={result ? result : ''}
                     onChange={this.handleInput}
@@ -106,8 +109,8 @@ class Converter extends Component {
                 </div>
               </div>
             </div>
-          </form>
-          <div className='card-panel'>
+          </form><br/>
+          <div className='card'>
             <h5>History</h5>
             {List}
           </div>
