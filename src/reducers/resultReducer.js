@@ -1,8 +1,10 @@
-const initState = {};
+import { RESULT } from "../actions/actionTypes";
+
+const initState = [];
 
 export const resultReducer = (state = initState, action) => {
   switch (action.type) {
-    case 'RESULT':
+    case RESULT:
       return action.result;
     default:
       return state;

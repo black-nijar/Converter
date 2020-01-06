@@ -10,7 +10,7 @@ class Converter extends Component {
 
   componentDidMount() {
     this.props.fetchCurrency()
-    this.props.currencyUpdate('GBP')
+    this.props.currencyUpdate('AED')
   }
 
   handleChange = (e) => {
@@ -21,7 +21,7 @@ class Converter extends Component {
   }
 
   makeConversion = (targetCurrency, input) => {
-    const { rates, base } = this.props.currencyData.currency
+    const { currency: { rates, base } } = this.props.currencyData
     let selectedRate = rates[targetCurrency]
     const result = input * selectedRate
     if (result !== 0 && !isNaN(result)) {
@@ -45,11 +45,14 @@ class Converter extends Component {
   render() {
     const { conversionValue: { result } } = this.props
     if (this.props.currencyData === null || result === isNaN) {
-      return <div></div>
+      return
     }
-    const { base, date } = this.props.currencyData.currency
-    const toCurrency = ['GBP', 'INR']
-    const { conversionHistory } = this.props || {};
+    const { currency: { base, date, rates } } = this.props.currencyData
+    var toCurrency = []
+    for (let keys in rates) {
+      toCurrency.push(keys)
+    }
+    const { conversionHistory } = this.props
     const List = conversionHistory.length ? (
       conversionHistory.map((currentHistory, index) => {
         return (
@@ -71,7 +74,7 @@ class Converter extends Component {
               <h5 className='center card-title'>CURRENCY CONVERTER</h5><br />
               <h6>{date}</h6>
               <div className='row'>
-                <div className='input-field col s6' currency='currency'>
+                <div className='input-field col s6'>
                   <select
                     className='browser-default'
                     name='base'
@@ -85,7 +88,7 @@ class Converter extends Component {
                     onChange={this.handleInput}
                   />
                 </div>
-                <div className='input-field col s6' currency='convertTo'>
+                <div className='input-field col s6'>
                   <select
                     className='browser-default'
                     onChange={this.handleChange}
@@ -96,7 +99,7 @@ class Converter extends Component {
                   </select>
                   <input
                     type='number'
-                    value={result ? result : {}}
+                    value={result ? result : ''}
                     onChange={this.handleInput}
                     disabled={true}
                   />
